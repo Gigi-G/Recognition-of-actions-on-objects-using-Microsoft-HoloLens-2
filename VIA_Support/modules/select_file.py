@@ -1,13 +1,10 @@
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
-
 class SelectFile:
 
     @staticmethod
-    def get_path() -> str:
+    def get_path(message:str) -> str:
         """
-        Returns the path of the selected file
+        Return the path of the selected file
         """
-        Tk().withdraw()
-        return askopenfilename()
+        print(message)
+        return input()
         
