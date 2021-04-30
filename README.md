@@ -9,3 +9,5 @@ Tesi Laurea Triennale
 - Effettuare una buona etichettatura utilizzando VIA.
 - Visualizzazione delle coordinate dei joints utilizzando https://matplotlib.org/2.1.2/gallery/animation/simple_3danim.html
   - Accanto alla visualizzazione bisogna inserire il frame di riferimento e l'etichetta corrispondente.
+- Effettuare uno studio qualitativo e quantitativo sull'etichettatura dei video
+- Sistemare le slide aggiungendo le date.
