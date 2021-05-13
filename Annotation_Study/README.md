@@ -106,7 +106,7 @@ J(A,B)={{|A\cap B|} \over {|A\cup B|}}
 $$
 Supponiamo di avere la seguente etichettatura per un'azione di *PUSH*:
 
-<img src="/home/gigi-g/OneDrive/Tesi/Annotation_Study/Immagini/13.png">
+<img src="Immagini/13.png">
 
 dove:
 
@@ -558,7 +558,7 @@ def box_plot(data) -> None:
 box_plot(similarities)
 ```
 
-<img src="/home/gigi-g/OneDrive/Tesi/Annotation_Study/Immagini/output_17_0.png">
+<img src="Immagini/output_17_0.png">
 
 
 Dal Box Plot possiamo osservare che solo un valore di similarità risulta essere un outlier, ovvero un valore anomalo, quindi questo sarà l'errore di etichettatura automatica più grande. I restanti valori sono superiori a 0.6, che comunque è un buon risultato dato che la similarità di Jaccard è compresa nell'intervallo [0,1].
@@ -595,7 +595,7 @@ print("PUSH:", sim_push, "\n")
 box_plot([sim_take, sim_release, sim_push])
 ```
 
-<img src="/home/gigi-g/OneDrive/Tesi/Annotation_Study/Immagini/output_20_0.png">
+<img src="Immagini/output_20_0.png">
 
 ​    
 
