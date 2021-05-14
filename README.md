@@ -12,3 +12,6 @@ Tesi Laurea Triennale
   - Accanto alla visualizzazione bisogna inserire il frame di riferimento e l'etichetta corrispondente. ❗
 - Aggiungere delle slide che rappresentano l'etichettatura fatta attraverso VIA. ✅
 - Effettuare uno studio qualitativo e quantitativo sull'etichettatura dei video. ❗
+  - Leggere il seguente paper: <a href="https://arxiv.org/pdf/1703.09026.pdf">https://arxiv.org/pdf/1703.09026.pdf ❗</a>
+  - Etichettare il secondo video e aggiungerlo allo studio dell'etichettatura. ❗
+- LSTM ❗
