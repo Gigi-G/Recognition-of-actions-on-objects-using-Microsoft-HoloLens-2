@@ -129,7 +129,7 @@ class VideoWindow(QtWidgets.QMainWindow):
 
     def positionChanged(self, position) -> None:
         self.positionSlider.setValue(position)
-        self.graph.draw(position+92)
+        self.graph.draw(position+900)
         self.graph.canvas.draw()
 
     def durationChanged(self, duration) -> None:
