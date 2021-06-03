@@ -2,19 +2,19 @@ import matplotlib.pyplot as plt
 
 class QuantitativeStudy:
 
-    def __init__(self, jsn) -> None:
+    def __init__(self, jsn:dict) -> None:
         self.metadata = jsn["metadata"]
 
     def print_metadata(self) -> None:
         print(self.metadata)
 
-    def jaccard_similarity(self, x11, x12, x21, x22) -> float:
+    def jaccard_similarity(self, x11:float, x12:float, x21:float, x22:float) -> float:
         I = min(x12, x22) - max(x11, x21)
         U = max(x12, x22) - min(x11, x21)
         return I/U
 
     def similarity_dict(self) -> dict:
-        action = 0
+        action:int = 0
         result = {}
         for key1, value in self.metadata.items():
             if action >= len(self.metadata) / 2: break
@@ -29,15 +29,15 @@ class QuantitativeStudy:
             action += 1
         return result
 
-    def mean(self, similarity, action = False) -> list:
+    def mean(self, similarity:dict, action:bool=False) -> list:
         if not action:
             return [sum(value["similarity"] for value in similarity.values()) / len(similarity)]
-        s_take = 0
-        c_take = 0
-        s_release = 0
-        c_release = 0
-        s_push = 0
-        c_push = 0
+        s_take:float = 0
+        c_take:float = 0
+        s_release:float = 0
+        c_release:float = 0
+        s_push:float = 0
+        c_push:float = 0
         for _, value in similarity.items():
             if value["action"] == "Prendi":
                 s_take += value["similarity"]
@@ -50,13 +50,13 @@ class QuantitativeStudy:
                 c_push += 1
         return [s_take/c_take, s_release/c_release, s_push/c_push]
 
-    def get_similarities(self, similarity) -> list:
+    def get_similarities(self, similarity:dict) -> list:
         similarities = []
         for _, value in similarity.items():
             similarities.append(value["similarity"])
         return similarities
 
-    def box_plot(self, data) -> None:
+    def box_plot(self, data:list) -> None:
         green_diamond = dict(markerfacecolor='g', marker='D')
         fig1, ax1 = plt.subplots()
         ax1.set_title('Box Plot')
@@ -65,7 +65,7 @@ class QuantitativeStudy:
             plt.xticks([1, 2, 3], ['Take', 'Release', 'Push'])
         plt.plot()
     
-    def get_similarity_actions(self, similarity) -> list:
+    def get_similarity_actions(self, similarity:dict) -> list:
         sim_take = []
         sim_release = []
         sim_push = []
