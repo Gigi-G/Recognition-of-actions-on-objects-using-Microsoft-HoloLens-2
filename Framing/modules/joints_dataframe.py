@@ -43,10 +43,10 @@ class JointsDataFrame():
                 if str(start_tim) in hand_pose_dict:
                     for key, val in hand_pose_dict[str(start_tim)].items():
                         data[key][self.__index_data] = val
-                    for _, val in target.items():
-                        if val["time"][0] <= start_tim <= val["time"][1]:
-                            data["TARGET"][self.__index_data] = val["action"]
-                            break
+                for _, val in target.items():
+                    if val["time"][0] <= start_tim <= val["time"][1]:
+                        data["TARGET"][self.__index_data] = val["action"]
+                        break
                 start_tim += 1
                 index += 1
             self.__index_data += 1
