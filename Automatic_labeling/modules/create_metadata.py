@@ -1,10 +1,5 @@
 class CreateMetadata:
-
-    @staticmethod
-    def modify_specific_key(metadata:dict, key:str, left_size:float = 0, right_size:float = 0) -> None:
-        metadata[key]["z"][0] += left_size
-        metadata[key]["z"][1] += right_size
-
+    
     @staticmethod
     def create(action_vector:list, time:int, left_size:int = 0, right_size:int = 0) -> dict:
         met:dict = {}
