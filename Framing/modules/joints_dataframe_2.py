@@ -43,8 +43,6 @@ class JointsDataFrame():
         return 1000/frame_rate
 
     def __create_records(self, video_duration:int, start_tim:int, hand_pose_dict:dict, data:dict, target:dict) -> None:
-        #print(target)
-        vd = start_tim
         while video_duration > 0:
             index:int = 0
             for key in data:
@@ -58,16 +56,13 @@ class JointsDataFrame():
                 if str(start_tim) in hand_pose_dict:
                     find_time = True
                     for key, val in hand_pose_dict[str(start_tim)].items():
-                        #print(val)
-                        data[key][self.__index_data] = float(val)
-                        #data["TIME"][self.__index_data] = start_tim - vd
+                        data[key][self.__index_data] = val
+                        #data["TIME"][self.__index_data] = start_tim
                 start_tim += 1
                 index += 1
             for _, val in target.items():
                 if val["time"][0] <= start_tim <= val["time"][1]:
                     if find_time:
-                        #data["START"][self.__index_data] = val["time"][0] - vd
-                        #data["END"][self.__index_data] = val["time"][1] - vd
                         data["TARGET"][self.__index_data] = val["action"]
                     else:
                         for key in data:
@@ -76,17 +71,14 @@ class JointsDataFrame():
                         break
             self.__index_data += 1
 
-    def get_dataframe(self) -> None:
+    def get_dataframe(self) -> pd.DataFrame:
+        records = copy.deepcopy(self.__hand_joints)
         for videos in self.__video_in_folder:
             for video in videos:
-                print("START: " + video)
-                records = copy.deepcopy(self.__hand_joints)
-                video_duration:int = ExtractVideoDuration.get_duration(video)
                 print(video[:-10] + "_handPose3D.txt")
                 print(video[:-10] + "_action.json")
-                #hand_pose:HandPose = HandPose(self.__hand_poses[self.__video_in_folder.index(videos)][videos.index(video)])
+                video_duration:int = ExtractVideoDuration.get_duration(video)
                 hand_pose:HandPose = HandPose(video[:-10] + "_handPose3D.txt")
-                self.__index_data = 0 #da eliminare se si vuole creare un unico dataframe
                 self.__create_records(
                     video_duration,
                     hand_pose.get_start_time(),
@@ -94,5 +86,4 @@ class JointsDataFrame():
                     records,
                     Target.get(video[:-10] + "_action.json", hand_pose.get_start_time())
                 )
-                pd.DataFrame(records, columns=self.__hand_joint_names).to_csv(video[:-3] + "csv", index=False)
-                print("END\n")
+        return pd.DataFrame(records, columns=self.__hand_joint_names)
