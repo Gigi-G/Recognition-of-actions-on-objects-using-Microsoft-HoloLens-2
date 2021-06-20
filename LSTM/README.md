@@ -128,3 +128,54 @@ In questa prova non era ancora stato aggiunto il grafico sulla metrica F1-score.
 
 <img src="./LSTM-Esperimenti/Immagini/Prova8_CM.png">
 
+
+
+
+
+| Prova n.      | 9     |
+| ------------- | ----- |
+| Epoche        | 500   |
+| Learning Rate | 0.002 |
+
+<img src="./LSTM-Esperimenti/Immagini/Prova9_LA.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova9_F1_1.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova9_F1_2.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova9_CM.png">
+
+
+
+
+
+| Prova n.      | 10    |
+| ------------- | ----- |
+| Epoche        | 5000  |
+| Learning Rate | 0.002 |
+
+<img src="./LSTM-Esperimenti/Immagini/Prova10_LA.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova10_F1_1.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova10_F1_2.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova10_CM.png">
+
+
+
+
+
+| Prova n.      | 11    |
+| ------------- | ----- |
+| Epoche        | 500   |
+| Learning Rate | 0.002 |
+| Layer         | 2     |
+
+<img src="./LSTM-Esperimenti/Immagini/Prova11_LA.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova11_F1_1.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova11_F1_2.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova11_CM.png">
