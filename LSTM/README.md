@@ -115,10 +115,10 @@ In questa prova non era ancora stato aggiunto il grafico sulla metrica F1-score.
 
 
 
-| Prova n.      | 8    |
-| ------------- | ---- |
-| Epoche        | 50   |
-| Learning Rate | 0.06 |
+| Prova n.      | 8     |
+| ------------- | ----- |
+| Epoche        | 50    |
+| Learning Rate | 0.003 |
 
 <img src="./LSTM-Esperimenti/Immagini/Prova8_LA.png">
 
