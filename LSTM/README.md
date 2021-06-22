@@ -179,3 +179,39 @@ In questa prova non era ancora stato aggiunto il grafico sulla metrica F1-score.
 <img src="./LSTM-Esperimenti/Immagini/Prova11_F1_2.png">
 
 <img src="./LSTM-Esperimenti/Immagini/Prova11_CM.png">
+
+
+
+
+
+| Prova n.      | 12    |
+| ------------- | ----- |
+| Epoche        | 25    |
+| Learning Rate | 0.06  |
+| Finestra      | 33    |
+
+<img src="./LSTM-Esperimenti/Immagini/Prova12_LA.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova12_F1_1.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova12_F1_2.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova12_CM.png">
+
+
+
+
+
+| Prova n.      | 13    |
+| ------------- | ----- |
+| Epoche        | 200   |
+| Learning Rate | 0.06  |
+| Finestra      | 33    |
+
+<img src="./LSTM-Esperimenti/Immagini/Prova13_LA.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova13_F1_1.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova13_F1_2.png">
+
+<img src="./LSTM-Esperimenti/Immagini/Prova13_CM.png">
