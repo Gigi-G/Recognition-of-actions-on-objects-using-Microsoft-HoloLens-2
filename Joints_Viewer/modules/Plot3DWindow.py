@@ -1,20 +1,36 @@
+from typing import Any
 import matplotlib
+from torch.functional import Tensor
 matplotlib.use('Qt5Agg')
 from PyQt5 import QtCore, QtWidgets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from modules.HandPose import HandPose
 from modules.target import Target
+import torch
+import numpy as np
+from modules.LSTM import LSTM
+import json
+from scipy.stats import mode
 
 class Plot3DWindow(QtWidgets.QWidget):
     
     _time_keys:list = [] 
     _hand_pose:dict = {}
+    _model:Any = None
+    _colnames:list = []
+    _data:list = []
+    _window:int = 5
 
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Joints Viewer")
         self._graph_init()
+        self._model = LSTM(156)
+        self._model.load_state_dict(torch.load("../data/mymodel.pt"))
+        self._model.to(
+            torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        )
 
     def _graph_init(self) -> None:
         self.fig = Figure()
@@ -38,22 +54,48 @@ class Plot3DWindow(QtWidgets.QWidget):
         self.predictLabel = QtWidgets.QLabel()
         self.predictLabel.setText("PREDICT TARGET: None")
 
+    def idx2class(self, key:int) -> str:
+        names = {
+            0: "No_action",
+            1: "Prendi",
+            2: "Rilascia",
+            3: "Premi"
+        }
+        return names[key]
+
     def draw(self, time:int) -> None:
         time = min(self._time_keys, key=lambda x:abs(x-time))
         if time == 0: return
         coordinates:dict = self._hand_pose[str(time)]
         self.axes.clear()
         count:int = 0
-        for _, val in coordinates.items():
+        joints_video = [(0) for _ in range(156)]
+        for key, val in coordinates.items():
             if count == 0:
                 try:
                     x:float = float(val)
+                    joints_video[self._colnames.index(key)] = x
                 except:
+                    if len(self._data) >= self._window:
+                        self._data.pop(0)
+                    self._data.append(joints_video)
+                    self._model.eval()
+                    with torch.no_grad():
+                        batch:Tensor = torch.from_numpy(np.array([joints_video]).astype(float)).float().to(
+                            torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+                        )
+                        y_pred, _ = self._model(batch)
+                        _, y_tags = torch.max(y_pred, dim=1)
                     self.realLabel.setText("REAL TARGET: " + str(val))
+                    #self.predictLabel.setText("PREDICT TARGET: " + self.idx2class(mode(y_tags.cpu().numpy(), axis=None)[0][0]))
+                    self.predictLabel.setText("PREDICT TARGET: " + self.idx2class(y_tags.cpu().numpy()[0]))
+                    joints_video = []
             elif count == 1:
                 y:float = val
+                joints_video[self._colnames.index(key)] = y
             elif count == 2:
                 z:float = val
+                joints_video[self._colnames.index(key)] = z
                 self.axes.scatter(x, y, z, marker='o', c="limegreen")
                 self.axes.set_xlim3d(left=-0.2, right=0.2) 
                 self.axes.set_ylim3d(bottom=-0.2, top=0.2) 
@@ -72,13 +114,20 @@ class Plot3DWindow(QtWidgets.QWidget):
                 if val["time"][0] <= start_tim <= val["time"][1]:
                     self._hand_pose[key]["action"] = val["action"]
 
+    def load_hand_joints(self) -> None:
+        with open("./hand_joints.json") as f:
+            joints:dict = json.load(f)
+            self._colnames = [(joint) for joint in joints]
+            f.close()
+
     def openFile(self):
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Open Hand Pose", QtCore.QDir.homePath())
         if fileName:
             self._hand_pose = HandPose(fileName).get_hand_pose_dict()
             self.add_target(Target.get(fileName[:-15] + "_action.json", 0))
-            for key in self._hand_pose:
-                self._time_keys.append(int(key))
+            self._time_keys = [(int(key)) for key in self._hand_pose]
+            self.load_hand_joints()
+                
 
     def exitCall(self) -> None:
         QtWidgets.QApplication.quit()
