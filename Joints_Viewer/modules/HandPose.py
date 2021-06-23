@@ -37,12 +37,16 @@ class HandPose:
             joint_info:list = other.split("_")
             if key not in d:
                 d[key] = {
-                    hand + "_" + joint_info[0] + "_x": float(joint_info[2]),
-                    hand + "_" + joint_info[0] + "_y": float(joint_info[4]),
-                    hand + "_" + joint_info[0] + "_z": float(joint_info[6])
+                    hand + "_" + joint_info[0]: [
+                        float(joint_info[2]),
+                        float(joint_info[4]),
+                        float(joint_info[6])
+                    ]
                 }
             else:
-                d[key][hand + "_" + joint_info[0] + "_x"] = float(joint_info[2])
-                d[key][hand + "_" + joint_info[0] + "_y"] = float(joint_info[4])
-                d[key][hand + "_" + joint_info[0] + "_z"] = float(joint_info[6])
+                d[key][hand + "_" + joint_info[0]] = [
+                    float(joint_info[2]),
+                    float(joint_info[4]),
+                    float(joint_info[6])
+                ]
         return d

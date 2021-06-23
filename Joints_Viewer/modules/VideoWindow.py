@@ -99,7 +99,8 @@ class VideoWindow(QtWidgets.QMainWindow):
         if fileName:
             media = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(fileName))
             self.mediaPlayer.setMedia(media)
-            self.mediaPlayer.setPlaybackRate(0.5)
+            self.mediaPlayer.setPlaybackRate(0.25)
+            self.mediaPlayer.setNotifyInterval(1)
             self.playButton.setEnabled(True)
 
     def closeEvent(self, event) -> None:
@@ -129,7 +130,8 @@ class VideoWindow(QtWidgets.QMainWindow):
 
     def positionChanged(self, position) -> None:
         self.positionSlider.setValue(position)
-        self.graph.draw(position+900)
+        #self.graph.draw(position+450)
+        self.graph.draw(position)
         self.graph.canvas.draw()
 
     def durationChanged(self, duration) -> None:

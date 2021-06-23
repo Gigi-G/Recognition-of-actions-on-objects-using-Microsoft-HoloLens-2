@@ -20,13 +20,13 @@ class Plot3DWindow(QtWidgets.QWidget):
     _model:Any = None
     _colnames:list = []
     _data:list = []
-    _window:int = 5
+    _window:int = 3
 
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Joints Viewer")
         self._graph_init()
-        self._model = LSTM(156)
+        self._model = LSTM(156, num_layers=2)
         self._model.load_state_dict(torch.load("../data/mymodel.pt"))
         self._model.to(
             torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -63,45 +63,49 @@ class Plot3DWindow(QtWidgets.QWidget):
         }
         return names[key]
 
+    def get_action(self, joints_video:list, val:str) -> None:
+        if len(self._data) >= self._window:
+            self._data.pop(0)
+        self._data.append(joints_video)
+        self._model.eval()
+        with torch.no_grad():
+            batch:Tensor = torch.from_numpy(np.array([joints_video]).astype(float)).float().to(
+                torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            )
+            y_pred, _ = self._model(batch)
+            _, y_tags = torch.max(y_pred, dim=1)
+            #print(y_tags)
+        self.realLabel.setText("REAL TARGET: " + str(val))
+        #self.predictLabel.setText("PREDICT TARGET: " + self.idx2class(mode(y_tags.cpu().numpy(), axis=None)[0][0]))
+        self.predictLabel.setText("PREDICT TARGET: " + self.idx2class(y_tags.cpu().numpy()[0]))
+
     def draw(self, time:int) -> None:
-        time = min(self._time_keys, key=lambda x:abs(x-time))
-        if time == 0: return
-        coordinates:dict = self._hand_pose[str(time)]
+        #time = min(self._time_keys, key=lambda x: abs(x-time))
+        t:list = []
+        for key in self._time_keys:
+            if abs(time - key) < 500:
+                t.append(key)
+        time = max(t) if len(t) > 0 else 0
         self.axes.clear()
-        count:int = 0
-        joints_video = [(0) for _ in range(156)]
-        for key, val in coordinates.items():
-            if count == 0:
-                try:
-                    x:float = float(val)
-                    joints_video[self._colnames.index(key)] = x
-                except:
-                    if len(self._data) >= self._window:
-                        self._data.pop(0)
-                    self._data.append(joints_video)
-                    self._model.eval()
-                    with torch.no_grad():
-                        batch:Tensor = torch.from_numpy(np.array([joints_video]).astype(float)).float().to(
-                            torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-                        )
-                        y_pred, _ = self._model(batch)
-                        _, y_tags = torch.max(y_pred, dim=1)
-                    self.realLabel.setText("REAL TARGET: " + str(val))
-                    #self.predictLabel.setText("PREDICT TARGET: " + self.idx2class(mode(y_tags.cpu().numpy(), axis=None)[0][0]))
-                    self.predictLabel.setText("PREDICT TARGET: " + self.idx2class(y_tags.cpu().numpy()[0]))
+        if time == 0:
+            joints_video = [0.0] * 156
+            self.get_action(joints_video, "No_action")
+        else:
+            coordinates = self._hand_pose[str(time)]
+            joints_video = [0.0] * 156
+            for key, val in coordinates.items():
+                if key == "action":
+                    self.get_action(joints_video, val)
                     joints_video = []
-            elif count == 1:
-                y:float = val
-                joints_video[self._colnames.index(key)] = y
-            elif count == 2:
-                z:float = val
-                joints_video[self._colnames.index(key)] = z
-                self.axes.scatter(x, y, z, marker='o', c="limegreen")
-                self.axes.set_xlim3d(left=-0.2, right=0.2) 
-                self.axes.set_ylim3d(bottom=-0.2, top=0.2) 
-                self.axes.set_zlim3d(bottom=-0.4, top=1)
-                count = -1
-            count += 1
+                else:
+                    x, y, z = val
+                    joints_video[self._colnames.index(key + "_x")] = x
+                    joints_video[self._colnames.index(key + "_y")] = y
+                    joints_video[self._colnames.index(key + "_z")] = z
+                    self.axes.scatter(x, y, z, marker='o', c="limegreen")
+                    self.axes.set_xlim3d(left=-0.2, right=0.2) 
+                    self.axes.set_ylim3d(bottom=-0.2, top=0.2) 
+                    self.axes.set_zlim3d(bottom=-0.4, top=1)
 
     def hand_pose_length(self) -> int:
         return len(self._hand_pose)
