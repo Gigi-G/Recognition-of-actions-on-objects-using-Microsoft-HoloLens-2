@@ -220,7 +220,7 @@ In questa prova non era ancora stato aggiunto il grafico sulla metrica F1-score.
 
 
 
-| Prova n.      | 13    |
+| Prova n.      | 14    |
 | ------------- | ----- |
 | Epoche        | 200   |
 | Learning Rate | 0.06  |
