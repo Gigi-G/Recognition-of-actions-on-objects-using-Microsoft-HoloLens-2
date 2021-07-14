@@ -14,7 +14,7 @@ class ExtractAction:
 
     def get_time(self) -> int:
         hours, minutes, seconds, millis = [(int(elem)) for elem in self._action_file.readline().split("-")]
-        return (hours * 60 + minutes * 60 + seconds)*1000 + millis
+        return (hours * 3600 + minutes * 60 + seconds)*1000 + millis
     
     def get_action_vector(self) -> list:
         return [(act) for act in self._action_file]
