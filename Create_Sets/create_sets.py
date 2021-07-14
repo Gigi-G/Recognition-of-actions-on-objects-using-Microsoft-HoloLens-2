@@ -8,7 +8,7 @@ def get_csv_files() -> list:
     csv:list = []
     for folder in folders:
         for file in glob.glob(folder + "/*.csv"):
-            csv.append(file)
+            csv.append(file.replace("\\", "/"))
     random.shuffle(csv)
     return csv
 
