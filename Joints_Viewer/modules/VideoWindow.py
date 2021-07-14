@@ -99,7 +99,7 @@ class VideoWindow(QtWidgets.QMainWindow):
         if fileName:
             media = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(fileName))
             self.mediaPlayer.setMedia(media)
-            self.mediaPlayer.setPlaybackRate(0.25)
+            self.mediaPlayer.setPlaybackRate(0.75)
             self.mediaPlayer.setNotifyInterval(0.5)
             self.playButton.setEnabled(True)
 
