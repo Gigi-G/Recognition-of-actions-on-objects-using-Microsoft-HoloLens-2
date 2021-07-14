@@ -14,7 +14,13 @@ VIDEO_DA_SCARTARE
 Actions
 Annotation
 HandPoses
-framing_action (copia).csv
 test.csv
 train.csv
 val.csv
+ETICHETTE_MODIFICATE
+modelli_overlap
+modelli_senza_overlap
+random_model
+LSTM-Esperimenti
+Schema
+.metals
