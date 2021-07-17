@@ -14,4 +14,4 @@ Tesi Laurea Triennale
 - Effettuare uno studio qualitativo e quantitativo sull'etichettatura dei video. ✅
   - Leggere il seguente paper: <a href="https://arxiv.org/pdf/1703.09026.pdf">https://arxiv.org/pdf/1703.09026.pdf </a>✅
   - Etichettare il secondo video e aggiungerlo allo studio dell'etichettatura. ✅
-- LSTM ❗
+- LSTM ✅
