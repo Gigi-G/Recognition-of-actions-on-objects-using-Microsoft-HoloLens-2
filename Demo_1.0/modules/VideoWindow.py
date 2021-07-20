@@ -57,6 +57,15 @@ class VideoWindow(QtWidgets.QMainWindow):
             3: "Premi"
         }
         return names[key]
+    
+    def idx2class3(self, key:int) -> str:
+        names = {
+            0: "No_action",
+            1: "P/R",
+            2: "P/R",
+            3: "Premi"
+        }
+        return names[key]
 
     def class2pseudo(self, key:str) -> str:
         names = {
@@ -64,6 +73,15 @@ class VideoWindow(QtWidgets.QMainWindow):
             "Prendi": "Action",
             "Rilascia": "Action",
             "Premi": "Action"
+        }
+        return names[key]
+    
+    def class2pseudo2(self, key:str) -> str:
+        names = {
+            "No_action": "No_action",
+            "Prendi": "P/R",
+            "Rilascia": "P/R",
+            "Premi": "Premi"
         }
         return names[key]
 
@@ -250,7 +268,7 @@ class VideoWindow(QtWidgets.QMainWindow):
         #self.realLabel.setText("GROUND TRUTH: " + str(val))
         self.predictLabel.setText("PREDICTION: " + self.idx2class(y_tags))
         if self.class2pseudo(val) == self.idx2class(y_tags):
-        #if val == self.idx2class(y_tags):
+        #if val == self.idx2class2(y_tags):
             self.realLabel.setStyleSheet("background-color: limegreen")
             self.predictLabel.setStyleSheet("background-color: limegreen")
         else:
