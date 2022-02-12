@@ -24,13 +24,6 @@ class JointsDataFrame():
             self.__video_in_folder.append(glob.glob(folder + "/*.mp4"))
             self.__annotations.append(glob.glob(folder + "/*.json"))
             self.__hand_poses.append(glob.glob(folder + "/*_handPose3D.txt"))
-        #for folder in folders:
-        #    for annotation in glob.glob(folder + "/*.json"):
-        #        self.__annotations.append(annotation)
-        #    for action in glob.glob(folder + "/*_action.txt"):
-        #        self.__hand_poses.append(action)
-        #    for hand_poses in glob.glob(folder + "/*_handPose3D.txt"):
-        #        self.__hand_poses.append(hand_poses)
 
     def __load_hand_joints(self) -> None:
         with open("./hand_joints.json") as f:
@@ -57,7 +50,6 @@ class JointsDataFrame():
                     find_time = True
                     for key, val in hand_pose_dict[str(start_tim)].items():
                         data[key][self.__index_data] = val
-                        #data["TIME"][self.__index_data] = start_tim
                 start_tim += 1
                 index += 1
             for _, val in target.items():
