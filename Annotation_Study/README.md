@@ -101,9 +101,9 @@ In maniera qualitativa, ovvero osservando le etichettature manuali e quelle auto
 ## Studio Quantitativo
 
 Per effettuare lo studio quantitativo si utilizzerà l'**indice di Jaccard**, che misura la similarità tra insiemi campionari, ed è definito come la dimensione dell'intersezione divisa per la dimensione dell'unione degli insiemi campionari.
-$$
-J(A,B)={{|A\cap B|} \over {|A\cup B|}}
-$$
+
+<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?J(A,B)={{|A\cap B|} \over {|A\cup B|}}" />
+
 Supponiamo di avere la seguente etichettatura per un'azione di *PUSH*:
 
 <img src="Immagini/13.png">
@@ -116,16 +116,15 @@ dove:
 - $x_{22}$ rappresenta la fine dell'etichetta manuale.
 
 L'intersezione (I) e l'unione (U) possono essere definite come segue:
-$$
-I = \min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1}) \\
-U = \max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})
-$$
+
+<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?I = \min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})" />
+
+<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?U = \max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})" />
+
 Allora:
-$$
-J(Premi_A, Premi_M)={{|Premi_A\cap Premi_M|} \over {|Premi_A\cup Premi_M|}}= \\
-= {{I} \over {U}}= \\
-={{\min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})} \over {\max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})}}
-$$
+
+<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?J(Premi_A, Premi_M)={{|Premi_A\cap Premi_M|} \over {|Premi_A\cup Premi_M|}}= \\\\
+= {{I} \over {U}} = {{\min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})} \over {\max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})}}" />
 
 
 Adesso, possiamo calcolare la similarità tra tutte le etichette automatiche e quelle manuali.
@@ -137,7 +136,7 @@ from modules.extract_json import ExtractJSON
 
 js = json.loads(
     ExtractJSON.get_json(
-        "via_qualitative_study.json"
+        "./data/via_qualitative_study.json"
     )
 )
 js
