@@ -102,7 +102,7 @@ In maniera qualitativa, ovvero osservando le etichettature manuali e quelle auto
 
 Per effettuare lo studio quantitativo si utilizzerà l'**indice di Jaccard**, che misura la similarità tra insiemi campionari, ed è definito come la dimensione dell'intersezione divisa per la dimensione dell'unione degli insiemi campionari.
 
-<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?J(A,B)={{|A\cap B|} \over {|A\cup B|}}" />
+<img src="https://render.githubusercontent.com/render/math?math=J(A,B)={{|A\cap B|} \over {|A\cup B|}}" style="zoom: 150%;">
 
 Supponiamo di avere la seguente etichettatura per un'azione di *PUSH*:
 
@@ -117,13 +117,13 @@ dove:
 
 L'intersezione (I) e l'unione (U) possono essere definite come segue:
 
-<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?I = \min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})" />
+<img src="https://render.githubusercontent.com/render/math?math=I = \min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})" style="zoom: 150%;">
 
-<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?U = \max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})" />
+<img src="https://render.githubusercontent.com/render/math?math=U = \max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})" style="zoom: 150%;">
 
 Allora:
 
-<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?J(Premi_A, Premi_M)={{|Premi_A\cap Premi_M|} \over {|Premi_A\cup Premi_M|}}=\\\\= {{I} \over {U}} = {{\min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})} \over {\max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})}}" />
+<img src="https://render.githubusercontent.com/render/math?math=J(Premi_A, Premi_M)={{|Premi_A\cap Premi_M|} \over {|Premi_A\cup Premi_M|}} = {{I} \over {U}} = {{\min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})} \over {\max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})}}" style="zoom: 150%;">
 
 
 Adesso, possiamo calcolare la similarità tra tutte le etichette automatiche e quelle manuali.
