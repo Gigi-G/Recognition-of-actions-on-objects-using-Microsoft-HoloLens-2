@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import glob
 import random
 import os
