@@ -123,8 +123,7 @@ L'intersezione (I) e l'unione (U) possono essere definite come segue:
 
 Allora:
 
-<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?J(Premi_A, Premi_M)={{|Premi_A\cap Premi_M|} \over {|Premi_A\cup Premi_M|}}= \\\\
-= {{I} \over {U}} = {{\min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})} \over {\max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})}}" />
+<img style="text-align: center; display: block" src="https://latex.codecogs.com/gif.latex?J(Premi_A, Premi_M)={{|Premi_A\cap Premi_M|} \over {|Premi_A\cup Premi_M|}}=\\\\= {{I} \over {U}} = {{\min(x_{1,2}, x_{2,2}) - \max(x_{1,1} - x_{2,1})} \over {\max(x_{1,2}, x_{2,2}) - \min(x_{1,1} - x_{2,1})}}" />
 
 
 Adesso, possiamo calcolare la similarità tra tutte le etichette automatiche e quelle manuali.
