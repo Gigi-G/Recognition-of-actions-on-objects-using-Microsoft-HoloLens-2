@@ -20,16 +20,5 @@ class CreateMetadata:
                     "1": a
                 }
             }
-            # start_index += 1
-            # key:str = "1_" + str(start_index)
-            # met[key] = {
-            #     "vid": 1,
-            #     "flg": 0,
-            #     "z": [(tim_a+1)/1000, tim_f/1000],
-            #     "xy": [],
-            #     "av": {
-            #         "1": a
-            #     }
-            # }
             start_index += 1
         return met

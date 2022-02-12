@@ -15,7 +15,7 @@ def save_json_file(path:str, js:dict) -> None:
     print("JSON file has just been saved!")
 
 def main() -> None:
-    via_json:str = "./via.json"
+    via_json:str = "./data/via.json"
     js = json.loads(
         ExtractJSON.get_json(
             via_json
