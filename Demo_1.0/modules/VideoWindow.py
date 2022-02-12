@@ -128,6 +128,7 @@ class VideoWindow(QtWidgets.QMainWindow):
 
     def _create_graph_window(self, graph:Plot3DWindow) -> None:
         self.graph:Plot3DWindow = graph
+        self.graph.resize(840, 580)
         self.graph.show()
 
     def _create_actions(self) -> None:
